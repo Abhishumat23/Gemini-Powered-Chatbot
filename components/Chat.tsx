@@ -5,9 +5,13 @@ import { useChatStore, Message } from '@/lib/store';
 import ReactMarkdown from 'react-markdown';
 
 export function Chat() {
-  const { messages, addMessage } = useChatStore();
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const { messages, addMessage, clearMessages } = useChatStore();
+
+  useEffect(() => {
+    clearMessages();
+  }, [clearMessages]);
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
